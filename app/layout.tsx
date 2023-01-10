@@ -1,18 +1,23 @@
-import './globals.css'
+import "../styles/globals.css";
+import "../styles/tailwind.css";
+
+import { Fira_Code } from "@next/font/google";
+
+const firaCode = Fira_Code({
+  subsets: ["latin"],
+  weight: ["400", "700"],
+  variable: "--font-fira",
+});
 
 export default function RootLayout({
   children,
 }: {
-  children: React.ReactNode
+  children: React.ReactNode;
 }) {
   return (
-    <html lang="en">
-      {/*
-        <head /> will contain the components returned by the nearest parent
-        head.tsx. Find out more at https://beta.nextjs.org/docs/api-reference/file-conventions/head
-      */}
+    <html lang="en" className={firaCode.variable}>
       <head />
-      <body>{children}</body>
+      <body className="font-mono">{children}</body>
     </html>
-  )
+  );
 }

@@ -1,9 +1,8 @@
 import { comparePassword } from "@lib/auth";
 import { prisma } from "@lib/db";
-import { createJWT } from "@lib/auth";
 import { NextApiRequest, NextApiResponse } from "next";
 import { serialize } from "cookie";
-
+import { createJWT } from "@lib/jwt";
 export default async function handler(
   req: NextApiRequest,
   res: NextApiResponse

@@ -8,10 +8,7 @@ import {
 import { Pause } from "react-feather";
 import type { User } from "@prisma/client";
 import { prisma } from "./db";
-
-type UserPayload = {
-  id: string;
-};
+import { verifyJWT } from "./jwt";
 
 export const hashPassword = async (password: string) => {
   return await bcrypt.hash(password, 10);
@@ -22,27 +19,6 @@ export const comparePassword = async (
   hashedPassword: string
 ): Promise<boolean> => {
   return await bcrypt.compare(plainTextPassword, hashedPassword);
-};
-
-export const createJWT = async (userPayload: UserPayload) => {
-  const iat = Math.floor(Date.now() / 1000);
-  const exp = iat + 60 * 60 * 24 * 7;
-
-  return await new SignJWT(userPayload)
-    .setProtectedHeader({ alg: "HS256", typ: "JWT" })
-    .setExpirationTime(exp)
-    .setIssuedAt(iat)
-    .setNotBefore(iat)
-    .sign(new TextEncoder().encode(process.env.JWT_SECRET));
-};
-
-export const verifyJWT = async (token: string): Promise<UserPayload> => {
-  const { payload } = await jwtVerify(
-    token,
-    new TextEncoder().encode(process.env.JWT_SECRET)
-  );
-
-  return payload as UserPayload;
 };
 
 export const getUserFromCookie = async (

@@ -1,7 +1,8 @@
-import { createJWT, hashPassword } from "@lib/auth";
+import { hashPassword } from "@lib/auth";
 import { prisma } from "@lib/db";
 import type { NextApiRequest, NextApiResponse } from "next";
 import { serialize } from "cookie";
+import { createJWT } from "@lib/jwt";
 
 export default async function handler(
   req: NextApiRequest,

@@ -4,10 +4,11 @@ import { register, login } from "@lib/api";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { FormEvent, useCallback, useState } from "react";
-import { useImmer, useImmerReducer } from "use-immer";
+import { useImmer } from "use-immer";
 
 import Button from "./ui/Button";
 import Card from "./ui/Card";
+import ErrorBox from "./ui/Error";
 import Input from "./ui/Input";
 const registerContent = {
   linkUrl: "/signin",
@@ -44,6 +45,7 @@ const AuthForm = ({ mode }: Props) => {
   const handleSubmit = useCallback(
     async (e: FormEvent<HTMLFormElement>) => {
       e.preventDefault();
+      setError("");
 
       try {
         if (mode === "register") {
@@ -54,9 +56,12 @@ const AuthForm = ({ mode }: Props) => {
 
         router.replace("/home");
       } catch (e) {
-        setError(`Could not ${mode}`);
+        console.log(e);
+        if (e instanceof Error) {
+          setError(e.message);
+        }
       } finally {
-        setFormState(initial);
+        // setFormState(initial);
       }
     },
     [
@@ -141,6 +146,11 @@ const AuthForm = ({ mode }: Props) => {
               }
             />
           </div>
+          {error && (
+            <ErrorBox>
+              <p>{error}</p>
+            </ErrorBox>
+          )}
           <div className="flex items-center justify-between">
             <div>
               <span>

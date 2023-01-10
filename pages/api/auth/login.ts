@@ -21,7 +21,7 @@ export default async function handler(
   }
   const isPassword = await comparePassword(password, user.password);
   if (!isPassword) {
-    res.status(400).json({ message: "incorrectp assword" });
+    res.status(400).json({ message: "incorrect password" });
     return;
   }
 
@@ -35,5 +35,5 @@ export default async function handler(
     })
   );
 
-  res.status(201).json({ user });
+  res.status(201).json({ data: user });
 }

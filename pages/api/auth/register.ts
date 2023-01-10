@@ -32,5 +32,5 @@ export default async function handler(
     })
   );
 
-  res.status(201).json({ user });
+  res.status(201).json({ data: user });
 }

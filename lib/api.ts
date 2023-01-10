@@ -20,10 +20,14 @@ export const fetcher = async ({
 
   if (res.ok) {
     const data = await res.json();
+    console.log(data.data);
     return data.data;
   }
 
-  throw new Error("fetcher error");
+  // message returned in api routes by res.json()
+  const { message } = await res.json();
+
+  throw new Error(message);
 };
 
 export const register = async (input: CreateUserInput) => {

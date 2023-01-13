@@ -13,3 +13,12 @@ export const delay = (time: number) => {
     }, time)
   );
 };
+
+export const formatDate = (date: Date) => {
+  return new Date(date).toLocaleDateString("en-US", {
+    weekday: "long",
+    year: "numeric",
+    month: "short",
+    day: "numeric",
+  });
+};

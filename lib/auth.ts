@@ -1,11 +1,5 @@
-import { SignJWT, jwtVerify } from "jose";
 import bcrypt from "bcrypt";
-import { NextApiRequestCookies } from "next/dist/server/api-utils";
-import {
-  RequestCookie,
-  RequestCookies,
-} from "next/dist/server/web/spec-extension/cookies";
-import { Pause } from "react-feather";
+import { RequestCookies } from "next/dist/server/web/spec-extension/cookies";
 import type { User } from "@prisma/client";
 import { prisma } from "./db";
 import { verifyJWT } from "./jwt";

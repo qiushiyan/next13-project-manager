@@ -1,4 +1,4 @@
-import { PrismaClient } from "@prisma/client";
+import { Prisma, PrismaClient, User } from "@prisma/client";
 
 declare global {
   var cachedPrisma: PrismaClient;
@@ -14,4 +14,16 @@ if (process.env.NODE_ENV === "production") {
   prisma = global.cachedPrisma;
 }
 
-export { prisma };
+const projectWithCards = Prisma.validator<Prisma.ProjectArgs>()({
+  include: {
+    tasks: true,
+  },
+});
+
+const findUserProjects = (uid: string) => {
+  return Prisma.validator<Prisma.ProjectWhereInput>()({
+    ownerId: uid,
+  });
+};
+
+export { prisma, projectWithCards, findUserProjects };

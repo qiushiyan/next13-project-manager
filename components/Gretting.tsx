@@ -1,12 +1,12 @@
 import { getUserFromCookie } from "@lib/auth";
 import { prisma } from "@lib/db";
 import { delay } from "@lib/utils";
-import { cookies } from "next/headers";
 import Card from "./ui/Card";
 import Link from "next/link";
 import Button from "./ui/Button";
+import { cookies } from "next/headers";
 
-const getUser = async () => {
+export const getUser = async () => {
   await delay(1000);
   const user = await getUserFromCookie(cookies());
   return user;
@@ -14,7 +14,6 @@ const getUser = async () => {
 
 const Greeting = async () => {
   const user = await getUser();
-
   if (!user) {
     return (
       <div>

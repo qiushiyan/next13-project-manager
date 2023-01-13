@@ -9,6 +9,7 @@ import { Pause } from "react-feather";
 import type { User } from "@prisma/client";
 import { prisma } from "./db";
 import { verifyJWT } from "./jwt";
+import { ReadonlyRequestCookies } from "next/dist/server/app-render";
 
 export const hashPassword = async (password: string) => {
   return await bcrypt.hash(password, 10);
@@ -22,7 +23,7 @@ export const comparePassword = async (
 };
 
 export const getUserFromCookie = async (
-  cookies: RequestCookies
+  cookies: RequestCookies | ReadonlyRequestCookies
 ): Promise<User | null> => {
   const token = cookies.get(process.env.COOKIE_NAME as string);
   if (token) {

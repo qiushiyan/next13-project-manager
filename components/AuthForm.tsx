@@ -10,6 +10,7 @@ import Button from "./ui/Button";
 import Card from "./ui/Card";
 import ErrorBox from "./ui/Error";
 import Input from "./ui/Input";
+import { errToString } from "@lib/utils";
 const registerContent = {
   linkUrl: "/signin",
   linkText: "Already have an account?",
@@ -57,9 +58,7 @@ const AuthForm = ({ mode }: Props) => {
         router.replace("/home");
       } catch (e) {
         console.log(e);
-        if (e instanceof Error) {
-          setError(e.message);
-        }
+        setError(errToString(e));
       } finally {
         // setFormState(initial);
       }

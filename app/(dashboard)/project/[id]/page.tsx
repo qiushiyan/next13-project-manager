@@ -4,10 +4,11 @@ import { cookies } from "next/headers";
 
 const getProject = async (id: string) => {
   const user = await getUserFromCookie(cookies());
-  if (!user || user.id !== id) {
+  if (!user) {
     return null;
   }
-  return await prisma.project.findUnique({
+
+  const project = await prisma.project.findUnique({
     where: {
       id,
     },
@@ -15,6 +16,12 @@ const getProject = async (id: string) => {
       tasks: true,
     },
   });
+
+  if (!project || user.id !== project.ownerId) {
+    return null;
+  }
+
+  return project;
 };
 
 export const ProjectDetails = async ({

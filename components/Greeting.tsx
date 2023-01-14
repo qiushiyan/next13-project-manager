@@ -7,7 +7,7 @@ import Button from "./ui/Button";
 import { cookies } from "next/headers";
 
 export const getUser = async () => {
-  await delay(1000);
+  await delay(500);
   const user = await getUserFromCookie(cookies());
   return user;
 };

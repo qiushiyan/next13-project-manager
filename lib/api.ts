@@ -7,7 +7,7 @@ export const fetcher = async ({
 }: {
   url: string;
   method: string;
-  body: Object;
+  body?: Object;
 }) => {
   const res = await fetch(url, {
     method,
@@ -30,6 +30,14 @@ export const fetcher = async ({
   throw new Error(message);
 };
 
+export const login = async (input: LoginInput) => {
+  return await fetcher({
+    url: "/api/auth/login",
+    method: "POST",
+    body: input,
+  });
+};
+
 export const register = async (input: CreateUserInput) => {
   return await fetcher({
     url: "/api/auth/register",
@@ -38,10 +46,10 @@ export const register = async (input: CreateUserInput) => {
   });
 };
 
-export const login = async (input: LoginInput) => {
+export const logout = async () => {
   return await fetcher({
-    url: "/api/auth/login",
+    url: "/api/auth/logout",
     method: "POST",
-    body: input,
+    body: undefined,
   });
 };

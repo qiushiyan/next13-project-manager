@@ -26,4 +26,10 @@ const findUserProjects = (uid: string) => {
   });
 };
 
-export { prisma, projectWithCards, findUserProjects };
+const findUniqueProject = (id: string) => {
+  return Prisma.validator<Prisma.ProjectWhereUniqueInput>()({
+    id,
+  });
+};
+
+export { prisma, projectWithCards, findUserProjects, findUniqueProject };

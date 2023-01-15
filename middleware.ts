@@ -17,6 +17,10 @@ export async function middleware(request: NextRequest) {
     return NextResponse.next();
   }
 
+  if (pathname === "/") {
+    return NextResponse.redirect(new URL("/home", request.url));
+  }
+
   const jwt = request.cookies.get(process.env.COOKIE_NAME!);
   // if user is already logged in and tries to access login page, redirect to home page
   if (pathname.startsWith("/login")) {

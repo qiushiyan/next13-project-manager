@@ -42,14 +42,10 @@ const ProjectDetails = async ({ params }: { params: { id: string } }) => {
   );
 };
 
-export async function generateStaticPaths() {
-  const projectIds = (await prisma.project.findMany()).map(
-    (project) => project.id
-  );
-  return projectIds.map((id) => ({
-    params: {
-      id,
-    },
+export async function generateStaticParams() {
+  const projects = await prisma.project.findMany();
+  return projects.map((project) => ({
+    id: project.id,
   }));
 }
 

@@ -1,3 +1,4 @@
+import { hashPassword } from "@lib/auth";
 import { prisma } from "@lib/db";
 import { TASK_STATUS } from "@prisma/client";
 
@@ -35,7 +36,7 @@ const main = async () => {
     update: {},
     create: {
       email: "qq@qq.com",
-      password: "test",
+      password: await hashPassword("test"),
       projects: {
         create: generateProjects(),
       },

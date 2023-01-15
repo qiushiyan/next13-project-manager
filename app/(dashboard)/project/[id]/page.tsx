@@ -25,11 +25,7 @@ const getProject = async (id: string) => {
   return project;
 };
 
-export const ProjectDetails = async ({
-  params,
-}: {
-  params: { id: string };
-}) => {
+const ProjectDetails = async ({ params }: { params: { id: string } }) => {
   const { id } = params;
   const project = await getProject(id);
 

@@ -10,6 +10,7 @@ import { delay } from "@lib/utils";
 import { cookies } from "next/headers";
 import Link from "next/link";
 import { Suspense } from "react";
+import NewProject from "@components/NewProject";
 
 const getProjects = async () => {
   await delay(1000);
@@ -41,11 +42,11 @@ export default async function Page() {
             <Greeting />
           </Suspense>
         </div>
-        <div className="flex flex-2 grow items-center flex-wrap mt-3 -m-3 ">
+        <div className="grid md:grid-cols-1 lg:grid-cols-3 gap-4 mt-3 -m-3 ">
           {projects ? (
             projects.map((project) => {
               return (
-                <div className="w-1/3 p-3" key={project.id}>
+                <div className="p-3" key={project.id}>
                   <Link href={`/project/${project.id}`}>
                     <ProjectCard project={project} />
                   </Link>
@@ -57,7 +58,9 @@ export default async function Page() {
               <h2 className="text-gray-300">No project yet</h2>
             </Card>
           )}
-          <div className="w-1/3 p-3">{/* new project here */}</div>
+          <div className="p-3  flex justify-center items-center">
+            <NewProject />
+          </div>
         </div>
         <div className="mt-6 flex-2 grow w-full flex">
           <div className="w-full">

@@ -17,7 +17,10 @@ const ProjectCard = ({ project }: { project: ProjectWithCards }) => {
     },
     { completed: 0, total: 0 }
   );
-  const progress = Math.ceil((taskCounts.completed / taskCounts.total) * 100);
+  const progress =
+    taskCounts.total === 0
+      ? 0
+      : Math.ceil((taskCounts.completed / taskCounts.total) * 100);
 
   return (
     <Card className="px-6 py-8 hover:scale-105 hover:shadow-lg transition-all ease-in-out duration-200">

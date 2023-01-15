@@ -1,3 +1,4 @@
+import { Prisma } from "@prisma/client";
 import { CreateUserInput, LoginInput } from "./dto/auth";
 
 export const fetcher = async ({
@@ -50,6 +51,12 @@ export const logout = async () => {
   return await fetcher({
     url: "/api/auth/logout",
     method: "POST",
-    body: undefined,
+  });
+};
+export const createProject = (input: { title: string }) => {
+  return fetcher({
+    url: "/api/projects",
+    method: "POST",
+    body: input,
   });
 };

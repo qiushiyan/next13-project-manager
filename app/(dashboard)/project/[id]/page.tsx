@@ -1,3 +1,4 @@
+import TasksCard from "@components/TasksCard";
 import { getUserFromCookie } from "@lib/auth";
 import { prisma } from "@lib/db";
 import { cookies } from "next/headers";
@@ -37,16 +38,18 @@ export const ProjectDetails = async ({
   }
 
   return (
-    <div>
-      <h1>{project.title}</h1>
+    <div className="h-full">
+      <h2 className="text-2xl m-4">{project.title}</h2>
+      {/* @ts-ignore */}
+      <TasksCard tasks={project.tasks} title={"All tasks"} />
     </div>
   );
 };
 
 export async function generateStaticPaths() {
-  const projectIds = await (
-    await prisma.project.findMany()
-  ).map((project) => project.id);
+  const projectIds = (await prisma.project.findMany()).map(
+    (project) => project.id
+  );
   return projectIds.map((id) => ({
     params: {
       id,

@@ -43,12 +43,10 @@ const TasksCard = async ({
     <Card>
       <div className="flex justify-between items-center">
         <div>
-          <span className="text-3xl text-gray-600">{title}</span>
+          <span className="text-xl text-gray-600">{title}</span>
         </div>
         <div>
-          <Button intent="text" className="text-violet-600">
-            + Create New
-          </Button>
+          <Button intent="text">+ Create New</Button>
         </div>
       </div>
       <div>

@@ -9,6 +9,7 @@ const DashboardLayout = ({ children }: { children: React.ReactNode }) => {
         <Sidebar />
         {children}
       </GlassPane>
+      <div id="modal" />
     </main>
   );
 };

@@ -22,12 +22,12 @@ const Greeting = async () => {
     );
   }
 
+  const fullName = `${user.firstName ?? ""} ${user.lastName ?? ""}`;
+
   return (
     <Card className="w-full py-4 relative">
       <div className="mb-4">
-        <h1 className="text-3xl text-gray-700 mb-4">
-          Hello, {`${user.firstName} ${user.lastName}`}!
-        </h1>
+        <h1 className="text-3xl text-gray-700 mb-4">Hello {fullName}!</h1>
         <h4 className="text-xl text-gray-400">
           Check your daily tasks and schedule
         </h4>
